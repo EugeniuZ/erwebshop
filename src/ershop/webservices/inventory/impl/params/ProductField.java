@@ -1,4 +1,4 @@
-package ershop.webservices.inventory;
+package ershop.webservices.inventory.impl.params;
 
 public enum ProductField {
 	CategoryItemID,

@@ -1,0 +1,17 @@
+<project name="Inventory" default="empty">
+    <property file="build.properties"/>
+
+    <target name="empty"/>
+
+    <target name="compile">
+        <delete dir="out/ERWebShop"/>
+        <mkdir dir="out/ERWebShop"/>
+        <javac srcdir="${srcDirs}" classpath="${externalLibs}" destdir="${outputDirRoot}"/>
+    </target>
+
+    <target name="gen-wsdl-inventory" depends="compile">
+        <exec executable="wsgen" failonerror="true">
+            <arg line="-wsdl -r descriptors/META-INF -d ${outputDirRoot} -cp ${outputDirRoot} ershop.webservices.inventory.impl.InventoryQuery"/>
+        </exec>
+    </target>
+</project>
