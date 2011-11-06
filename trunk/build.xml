@@ -6,12 +6,17 @@
     <target name="compile">
         <delete dir="out/ERWebShop"/>
         <mkdir dir="out/ERWebShop"/>
-        <javac srcdir="${srcDirs}" classpath="${externalLibs}" destdir="${outputDirRoot}"/>
+        <javac srcdir="${srcDirs}" classpath="${externalLibs}" destdir="${outputDirRoot}" debug="true" debuglevel="lines,vars,source"/>
     </target>
 
     <target name="gen-wsdl-inventory" depends="compile">
         <exec executable="wsgen" failonerror="true">
             <arg line="-wsdl -r descriptors/META-INF -d ${outputDirRoot} -cp ${outputDirRoot} ershop.webservices.inventory.impl.InventoryQuery"/>
         </exec>
+    </target>
+
+    <target name="create-database" depends="compile">
+        <java classpath="${externalLibs};${outputDirRoot};descriptors"
+              classname="ershop.entity.SetupDB" fork="true"/>
     </target>
 </project>

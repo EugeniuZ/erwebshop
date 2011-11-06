@@ -5,8 +5,6 @@ import ershop.webservices.inventory.impl.params.*;
 
 import javax.jws.WebService;
 import java.util.List;
-import java.util.Map;
-
 
 @WebService(
         serviceName = "InventoryService",
@@ -18,25 +16,20 @@ public class InventoryQuery implements IInventoryQuery {
         return null;
     }
 
-    public ProductRecord[] findProducts(
-            ProductField[] selectedFields,
-            FilterCondition condition,
+    public ProductRecord[] findProducts(ProductField[] selectedFields, FilterCondition condition,
             List<MapContainer<ProductField, Boolean>> orderFields) {
         return null;
     }
 
     public void extractProductsForShipment(
-            MapContainer<String, Integer> lockedItems)
-            throws ItemsNotInStockException {
+            MapContainer<String, Integer> lockedItems) throws ItemsNotInStockException {
     }
 
     public void putBackItems(
             MapContainer<String, Integer> itemsToUnlock) {
     }
 
-    public MapContainer<String, Float> computeFinalPrice(
-            String[] productID,
-            String countryPrefix) {
+    public MapContainer<String, Float> computeFinalPrice(String[] productID, String countryPrefix) {
         return null;
     }
 }
