@@ -1,12 +1,19 @@
 package ershop.webservices.inventory;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import ershop.webservices.inventory.impl.params.*;
+
+import javax.jws.Oneway;
+import javax.jws.WebMethod;
+import javax.jws.WebService;
+import java.util.List;
 
 /**
  * @author Eugen, 11/1/11 6:22 PM
  */
+@WebService(
+        name = "InventoryQuery",
+        targetNamespace = "http://imselabs/lab2/group4"
+)
 public interface IInventoryQuery {
 
     /**
@@ -15,6 +22,7 @@ public interface IInventoryQuery {
      * @param productID The internal ID of the product type in the database
      * @return full product information
      */
+    @WebMethod
     ProductRecord getProductInfo(ProductRecord productID);
 
     /**
@@ -30,7 +38,8 @@ public interface IInventoryQuery {
      * @return The list of products that match the filtering conditions. The product records will contain only relevant values
      * only in the fields selected in 'selectedFields' parameter
      */
-    ProductRecord[] findProducts(ProductField[] selectedFields, FilterCondition condition, ArrayList<HashMap<ProductField, Boolean>> orderFields);
+    @WebMethod
+    ProductRecord[] findProducts(ProductField[] selectedFields, FilterCondition condition, List<MapContainer<ProductField, Boolean>> orderFields);
 
     /**
      * Locks the selected items in the repository so that no other customer can purchase them
@@ -39,11 +48,12 @@ public interface IInventoryQuery {
      *
      * @param lockedItems A list of items to lock. The list is a map that contains as key the product ID and as value the number
      * of items to lock
-     * @throws ItemsNotInStockException Thrown when the required number of items is not available in the stock. The exception
+     * @throws ershop.webservices.inventory.impl.params.ItemsNotInStockException Thrown when the required number of items is not available in the stock. The exception
      * will contain a list of items that are not any more in the stock as well as the quantity required to resupply in order
      * to satisfy this request
      */
-	void extractProductsForShipment(HashMap<String, Integer> lockedItems) throws ItemsNotInStockException;
+    @WebMethod
+	void extractProductsForShipment(MapContainer<String, Integer> lockedItems) throws ItemsNotInStockException;
 
     /**
      * Unlocks the items previously locked and makes them available for other customer to acquire
@@ -53,7 +63,9 @@ public interface IInventoryQuery {
      * @param itemsToUnlock  A list of items to unlock. The list is a map that contains as key the product ID and as value the number
      * of items to unlock
      */
-    void putBackItems(HashMap<String, Integer> itemsToUnlock);
+    @WebMethod
+    @Oneway
+    void putBackItems(MapContainer<String, Integer> itemsToUnlock);
 
     /**
      * Computes the price of a product taking into consideration the country-dependent taxes for that particular product
@@ -65,7 +77,8 @@ public interface IInventoryQuery {
      * @param countryPrefix The country prefix ( = Prefix field from the Country table)
      * @return The list of products together with their prices (original price + country-specific taxes)
      */
-    Map<String, Float> computeFinalPrice(String[] productID, String countryPrefix);
+    @WebMethod
+    MapContainer<String, Float> computeFinalPrice(String[] productID, String countryPrefix);
 }
 
 

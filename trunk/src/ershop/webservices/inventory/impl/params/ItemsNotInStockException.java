@@ -1,9 +1,9 @@
-package ershop.webservices.inventory;
+package ershop.webservices.inventory.impl.params;
 
 import java.util.HashMap;
 import java.util.Map;
 
-class ItemsNotInStockException extends Exception {
+public class ItemsNotInStockException extends Exception {
     /**
 	 * 
 	 */
