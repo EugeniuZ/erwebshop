@@ -10,6 +10,7 @@ import javax.persistence.Persistence;
 public class SetupDB {
     static final private String PERSISTENCE_UNIT= "Inventory";
     public static void main(String[] args) {
+    	//Rahim made some changes
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT);
         EntityManager em = emf.createEntityManager();
         em.close();
