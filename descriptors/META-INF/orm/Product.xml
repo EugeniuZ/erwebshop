@@ -1,0 +1,61 @@
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd"
+                 version="2.0">
+    <schema>webshop</schema>
+    <access>FIELD</access>
+    <!--Ignore annotations in source file (metadata-complete=true)-->
+    <entity class="ershop.entity.inventory.Product" metadata-complete="true">
+        <table name="ProductCatalog">
+            <unique-constraint>
+                <column-name>ProductCategory_IDREF</column-name>
+                <column-name>ProductCategoryItem_ID</column-name>
+            </unique-constraint>
+        </table>
+
+        <attributes>
+            <id name="id">
+                <column name="ID"/>
+            </id>
+            <basic name="productCategoryItemID">
+                <column name="ProductCategoryItem_ID" nullable="false"/>
+            </basic>
+            <basic name="name">
+                <column name="Name" length="100" nullable="false"/>
+            </basic>
+            <basic name="producerName">
+                <column name="ProducerName" length="100" nullable="false"/>
+            </basic>
+            <basic name="price">
+                <column name="Price" nullable="false"/>
+            </basic>
+            <basic name="weight">
+                <column name="Weight"/>
+            </basic>
+            <basic name="quantityInStock">
+                <column name="QtyStock" nullable="false"/>
+            </basic>
+            <basic name="quantityLocked">
+                <column name="QtyLocked" nullable="false"/>
+            </basic>
+            <basic name="availabilityThreshold">
+                <column name="AvailabilityThreshold" nullable="false"/>
+            </basic>
+            <basic name="resupplyQuantity">
+                <column name="QtyResupply" nullable="false"/>
+            </basic>
+            <basic name="description">
+                <column name="Description"/>
+            </basic>
+            <many-to-one name="categoryRef">
+                <join-column name="ProductCategory_IDREF" referenced-column-name="Local_ID" nullable="false"/>
+            </many-to-one>
+            <one-to-many name="promotions" mapped-by="product">
+                <cascade>
+                    <cascade-all/>
+                </cascade>
+            </one-to-many>
+        </attributes>
+    </entity>
+
+</entity-mappings>

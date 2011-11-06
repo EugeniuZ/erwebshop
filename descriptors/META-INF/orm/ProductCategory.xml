@@ -1,0 +1,30 @@
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd"
+                 version="2.0">
+    <schema>webshop</schema>
+    <access>FIELD</access>
+    <!--Ignore annotations in source file (metadata-complete=true)-->
+    <entity class="ershop.entity.inventory.ProductCategory" metadata-complete="true">
+        <table name="ProductCategory"/>
+
+        <attributes>
+            <id name="category">
+                <column name="Local_ID" length="80"/>
+            </id>
+            <basic name="productTypeIdentifier">
+                <column name="Global_ID" nullable="true"/>
+            </basic>
+            <one-to-many name="products" mapped-by="categoryRef">
+                <cascade>
+                    <cascade-all/>
+                </cascade>
+            </one-to-many>
+            <one-to-many name="taxes" mapped-by="prodCategory">
+                <cascade>
+                    <cascade-all/>
+                </cascade>
+            </one-to-many>
+        </attributes>
+    </entity>
+</entity-mappings>
