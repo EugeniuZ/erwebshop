@@ -1,0 +1,32 @@
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd"
+                 version="2.0">
+    <schema>webshop</schema>
+    <access>FIELD</access>
+    <!--Ignore annotations in source file (metadata-complete=true)-->
+    <entity class="ershop.entity.inventory.Tax" metadata-complete="true">
+        <table name="Taxes"/>
+
+        <attributes>
+            <embedded-id name="tKey"/>
+            <basic name="vat">
+                <column name="VAT"/>
+            </basic>
+            <many-to-one name="prodCategory" maps-id="productCategory">
+                <join-column name="Category_IDREF" referenced-column-name="Local_ID"/>
+            </many-to-one>
+        </attributes>
+    </entity>
+
+    <embeddable class="ershop.entity.inventory.TaxKey">
+        <attributes>
+            <basic name="countryPrefix">
+                <column name="CountryPrefix" length="3"/>
+            </basic>
+            <basic name="productCategory">
+                <column name="Category_IDREF"/>
+            </basic>
+        </attributes>
+    </embeddable>
+</entity-mappings>
