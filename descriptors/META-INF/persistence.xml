@@ -29,8 +29,8 @@
             <property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:hsql://localhost/webshop_inventory"/>
             <property name="javax.persistence.jdbc.user" value="ER"/>
             <property name="javax.persistence.jdbc.password" value="erwebshop"/>
-<!--            <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
-            <property name="eclipselink.ddl-generation.output-mode" value="database"/>-->
+            <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+            <property name="eclipselink.ddl-generation.output-mode" value="database"/>
         </properties>
 
     </persistence-unit>
