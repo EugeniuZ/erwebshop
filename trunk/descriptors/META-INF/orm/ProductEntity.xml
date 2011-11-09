@@ -5,7 +5,7 @@
     <schema>webshop</schema>
     <access>FIELD</access>
     <!--Ignore annotations in source file (metadata-complete=true)-->
-    <entity class="ershop.entity.inventory.Product" metadata-complete="true">
+    <entity class="ershop.entity.inventory.ProductEntity" metadata-complete="true">
         <table name="ProductCatalog">
             <unique-constraint>
                 <column-name>ProductCategory_IDREF</column-name>
@@ -16,12 +16,13 @@
         <attributes>
             <id name="id">
                 <column name="ID"/>
+                <generated-value strategy="IDENTITY"/>
             </id>
             <basic name="productCategoryItemID">
                 <column name="ProductCategoryItem_ID" nullable="false"/>
             </basic>
             <basic name="name">
-                <column name="Name" length="100" nullable="false"/>
+                <column name="Name" length="200" nullable="false"/>
             </basic>
             <basic name="producerName">
                 <column name="ProducerName" length="100" nullable="false"/>
@@ -45,12 +46,12 @@
                 <column name="QtyResupply" nullable="false"/>
             </basic>
             <basic name="description">
-                <column name="Description"/>
+                <column name="Description" length="2000"/>
             </basic>
             <many-to-one name="categoryRef">
                 <join-column name="ProductCategory_IDREF" referenced-column-name="Local_ID" nullable="false"/>
             </many-to-one>
-            <one-to-many name="promotions" mapped-by="product">
+            <one-to-many name="promotionEntities" mapped-by="productEntity">
                 <cascade>
                     <cascade-all/>
                 </cascade>

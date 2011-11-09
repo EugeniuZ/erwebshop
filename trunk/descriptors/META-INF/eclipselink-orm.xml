@@ -4,7 +4,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.eclipse.org/eclipselink/xsds/persistence/orm http://www.eclipse.org/eclipselink/xsds/eclipselink_orm_2_2.xsd"
 	version="2.2">
-    <entity class="ershop.entity.inventory.Product">
+    <entity class="ershop.entity.inventory.ProductEntity">
         <index name="ProductCategory_IX">
             <column-name>ProductCategory_IDREF</column-name>
         </index>

@@ -5,7 +5,7 @@
     <schema>webshop</schema>
     <access>FIELD</access>
     <!--Ignore annotations in source file (metadata-complete=true)-->
-    <entity class="ershop.entity.inventory.Tax" metadata-complete="true">
+    <entity class="ershop.entity.inventory.TaxEntity" metadata-complete="true">
         <table name="Taxes"/>
 
         <attributes>

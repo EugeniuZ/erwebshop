@@ -5,12 +5,13 @@
     <schema>webshop</schema>
     <access>FIELD</access>
     <!--Ignore annotations in source file (metadata-complete=true)-->
-    <entity class="ershop.entity.inventory.Promotion" metadata-complete="true">
+    <entity class="ershop.entity.inventory.PromotionEntity" metadata-complete="true">
         <table name="Promotions"/>
 
         <attributes>
             <id name="id">
                 <column name="ID"/>
+                <generated-value strategy="IDENTITY"/>
             </id>
             <basic name="quantityMin">
                 <column name="QtyMin"/>
@@ -18,7 +19,7 @@
             <basic name="discount">
                 <column name="Discount"/>
             </basic>
-            <many-to-one name="product">
+            <many-to-one name="productEntity">
                 <join-column name="Product_IDREF" referenced-column-name="ID"/>
             </many-to-one>
         </attributes>

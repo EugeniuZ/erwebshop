@@ -4,19 +4,60 @@
     <target name="empty"/>
 
     <target name="compile">
-        <delete dir="out/ERWebShop"/>
-        <mkdir dir="out/ERWebShop"/>
-        <javac srcdir="${srcDirs}" classpath="${externalLibs}" destdir="${outputDirRoot}" debug="true" debuglevel="lines,vars,source"/>
+        <delete dir="${outputDirRoot}"/>
+        <mkdir dir="${outputDirRoot}"/>
+        <javac srcdir="${srcDirs}" classpath="${externalLibs}" destdir="${outputDirRoot}" debug="true"
+               debuglevel="lines,vars,source"/>
     </target>
 
-    <target name="gen-wsdl-inventory" depends="compile">
+    <target name="gen-wsdl" depends="compile">
         <exec executable="wsgen" failonerror="true">
             <arg line="-wsdl -r descriptors/META-INF -d ${outputDirRoot} -cp ${outputDirRoot} ershop.webservices.inventory.impl.InventoryQuery"/>
         </exec>
     </target>
 
     <target name="create-database" depends="compile">
-        <java classpath="${externalLibs};${outputDirRoot};descriptors"
-              classname="ershop.entity.SetupDB" fork="true"/>
+        <java classpath="${externalLibs};${outputDirRoot};descriptors;."
+              classname="ershop.entity.SetupDB" fork="true" failonerror="true"/>
+        <sql
+                driver="org.hsqldb.jdbcDriver"
+                url="jdbc:hsqldb:hsql://localhost/webshop_inventory"
+                userid="ER"
+                password="erwebshop"
+                src="populate_db.sql"
+                classpath="${externalLibs}"
+                />
+    </target>
+
+    <target name="make-jar" depends="gen-wsdl">
+        <copy todir="${outputDirRoot}">
+            <fileset dir="descriptors"/>
+        </copy>
+        <jar basedir="${outputDirRoot}" destfile="out/InventoryWS.jar">
+            <exclude name="ershop/entity/SetupDB.class"/>
+            <exclude name="ershop/webservices/inventory/jaxws/**"/>
+        </jar>
+    </target>
+
+    <target name="deploy-ws" depends="make-jar">
+        <copy file="out/InventoryWS.jar" todir="${wsrepository}"/>
+    </target>
+
+    <target name="gen-wsclient" depends="deploy-ws">
+        <delete dir="test/ws_client" quiet="true"/>
+        <exec executable="wsimport" failonerror="true">
+            <arg line="-s test" description="where to put generated java files"/>
+            <arg line="-p ws_client" description="package name for the generated classes"/>
+            <arg line="-d ${outputDirRoot}" description="output class files directory"/>
+            <arg line="${wsdlFileLocation}" description="wsdl file location"/>
+        </exec>
+    </target>
+
+    <target name="move-dependencies-to-wso2-classpath">
+        <copy todir="${wso2.lib}" flatten="true">
+            <path>
+                <pathelement path="${externalLibs}"/>
+            </path>
+        </copy>
     </target>
 </project>
