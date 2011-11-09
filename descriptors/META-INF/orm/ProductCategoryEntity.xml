@@ -5,7 +5,7 @@
     <schema>webshop</schema>
     <access>FIELD</access>
     <!--Ignore annotations in source file (metadata-complete=true)-->
-    <entity class="ershop.entity.inventory.ProductCategory" metadata-complete="true">
+    <entity class="ershop.entity.inventory.ProductCategoryEntity" metadata-complete="true">
         <table name="ProductCategory"/>
 
         <attributes>
@@ -15,7 +15,7 @@
             <basic name="productTypeIdentifier">
                 <column name="Global_ID" nullable="true"/>
             </basic>
-            <one-to-many name="products" mapped-by="categoryRef">
+            <one-to-many name="productEntities" mapped-by="categoryRef">
                 <cascade>
                     <cascade-all/>
                 </cascade>

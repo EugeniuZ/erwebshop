@@ -1,133 +1,143 @@
 package ershop.webservices.inventory.impl.params;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //must be the JPA entity of the ProductCatalog table
 
 public class ProductRecord {
-    private int categoryItemID;
+    private String categoryItemID;
+    private String producerName;
     private String categoryRef;
+    private String description;
     private int productID;
     private String name;
-    private float price;
+    private double price;
     private int quantityInStock;
-    private float weight;
+    private double weight;
     private int availabilityThreshold;
     private int quantityResupply;
     private int quantityLocked;
-    List<Promotion> promotions;
+    private List<Promotion> promotions;
 
-    class Promotion {
-        /**
-         * what's the minimal quantity to be bought to benefit from the discount
-         */
-        private int minQuantityForPromotion;
-        /**
-         * the discount in decimal units, e.g. 5% = 0.05
-         */
-        private float discount;
-
-
-        public void setminQuantityForPromotion(int minQuantityForPromotion) {
-            this.minQuantityForPromotion = minQuantityForPromotion;
-        }
-
-        public int getminQuantityForPromotion() {
-            return minQuantityForPromotion;
-        }
-
-
-        public void setdiscount(float discount) {
-            this.discount = discount;
-        }
-
-        public float getdiscount() {
-            return discount;
-        }
-
-    }
-
-
-    public void setcategoryItemID(int categoryItemID) {
-        this.categoryItemID = categoryItemID;
-    }
-
-    public int getcategoryItemID() {
+    public String getCategoryItemID() {
         return categoryItemID;
     }
 
-
-    public void setcategoryRef(String categoryRef) {
-        this.categoryRef = categoryRef;
+    public void setCategoryItemID(String categoryItemID) {
+        this.categoryItemID = categoryItemID;
     }
 
-    public String getcategoryRef() {
+    public String getProducerName() {
+        return producerName;
+    }
+
+    public void setProducerName(String producerName) {
+        this.producerName = producerName;
+    }
+
+    public String getCategoryRef() {
         return categoryRef;
     }
 
-
-    public void setproductID(int productID) {
-        this.productID = productID;
+    public void setCategoryRef(String categoryRef) {
+        this.categoryRef = categoryRef;
     }
 
-    public int getproductID() {
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getProductID() {
         return productID;
     }
 
-
-    public void setname(String name) {
-        this.name = name;
+    public void setProductID(int productID) {
+        this.productID = productID;
     }
 
-    public String getname() {
+    public String getName() {
         return name;
     }
 
-    public void setprice(float price) {
-        this.price = price;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public float getprice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setquantityInStock(int quantityInStock) {
-        this.quantityInStock = quantityInStock;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
-    public int getquantityInStock() {
+    public int getQuantityInStock() {
         return quantityInStock;
     }
 
-    public void setweight(float weight) {
-        this.weight = weight;
+    public void setQuantityInStock(int quantityInStock) {
+        this.quantityInStock = quantityInStock;
     }
 
-    public float getweight() {
+    public double getWeight() {
         return weight;
     }
 
-    public void setavailabilityThreshold(int availabilityThreshold) {
-        this.availabilityThreshold = availabilityThreshold;
+    public void setWeight(double weight) {
+        this.weight = weight;
     }
 
-    public int getavailabilityThreshold() {
+    public int getAvailabilityThreshold() {
         return availabilityThreshold;
     }
 
-    public void setquantityResupply(int quantityResupply) {
-        this.quantityResupply = quantityResupply;
+    public void setAvailabilityThreshold(int availabilityThreshold) {
+        this.availabilityThreshold = availabilityThreshold;
     }
 
-    public int getquantityResupply() {
+    public int getQuantityResupply() {
         return quantityResupply;
     }
 
-    public void setquantityLocked(int quantityLocked) {
-        this.quantityLocked = quantityLocked;
+    public void setQuantityResupply(int quantityResupply) {
+        this.quantityResupply = quantityResupply;
     }
 
     public int getQuantityLocked() {
         return quantityLocked;
     }
+
+    public void setQuantityLocked(int quantityLocked) {
+        this.quantityLocked = quantityLocked;
+    }
+
+    public List<Promotion> getPromotions() {
+        return promotions;
+    }
+
+    public void setPromotions(List<Promotion> promotions) {
+        if (this.promotions != null)
+        {
+            this.promotions.addAll(promotions);
+        }
+        else
+        {
+            this.promotions = promotions;
+        }
+    }
+
+    public void addPromotion(Promotion promo)
+    {
+        if (promotions == null)
+        {
+            promotions = new ArrayList<Promotion>(1);
+        }
+        promotions.add(promo);
+    }
+
 }

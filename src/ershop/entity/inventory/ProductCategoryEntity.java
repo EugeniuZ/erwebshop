@@ -15,11 +15,11 @@ import java.util.Collection;
  *     the 'category' is the internally used product type identifier and the 'product type identifier' designates the universal
  *     product type identifiers.
  */
-public class ProductCategory implements Serializable {
+public class ProductCategoryEntity implements Serializable {
 
     private String category;
-    // we might have categories of products that are not mapped to any global standart product type
+    // we might have categories of productEntities that are not mapped to any global standart product type
     private String productTypeIdentifier;
-    private Collection<Product> products;
-    private Collection<Tax> taxes;
+    private Collection<ProductEntity> productEntities;
+    private Collection<TaxEntity> taxes;
 }

@@ -13,10 +13,10 @@
         <!--<jta-data-source></jta-data-source>
         <non-jta-data-source></non-jta-data-source>-->
 
-        <mapping-file>META-INF/orm/Product.xml</mapping-file>
-        <mapping-file>META-INF/orm/ProductCategory.xml</mapping-file>
-        <mapping-file>META-INF/orm/Promotion.xml</mapping-file>
-        <mapping-file>META-INF/orm/Tax.xml</mapping-file>
+        <mapping-file>META-INF/orm/ProductEntity.xml</mapping-file>
+        <mapping-file>META-INF/orm/ProductCategoryEntity.xml</mapping-file>
+        <mapping-file>META-INF/orm/PromotionEntity.xml</mapping-file>
+        <mapping-file>META-INF/orm/TaxEntity.xml</mapping-file>
 
         <!--Include in the persistence unit only the classes specified in this file. Ignore annotated classes that are not specified here-->
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
@@ -29,8 +29,8 @@
             <property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:hsql://localhost/webshop_inventory"/>
             <property name="javax.persistence.jdbc.user" value="ER"/>
             <property name="javax.persistence.jdbc.password" value="erwebshop"/>
-            <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
-            <property name="eclipselink.ddl-generation.output-mode" value="database"/>
+<!--            <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+            <property name="eclipselink.ddl-generation.output-mode" value="database"/>-->
         </properties>
 
     </persistence-unit>
